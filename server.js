@@ -2,8 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const http = require("http");
 const dotenv = require("dotenv");
+const app = require("./src/app");
 
-const app = express();
 const server = http.createServer(app);
 
 dotenv.config({ path: `${__dirname}/config.env` });
