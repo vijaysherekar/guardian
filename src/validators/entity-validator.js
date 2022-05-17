@@ -4,12 +4,14 @@ const DailyCollectionError = require('./../utility/error/daily-collector-error')
 const ProjectEntity = require('./../utility/enum/project-entity');
 const InventorySchema = require('./../entities/inventory-schema');
 const LoggerUtility = require('./../utility/logger');
+const ErrorTypes = require( './../utility/enum/error-types');
 module.exports = class EntityValidator {
 
     constructor () {
         this.projectEntity = new ProjectEntity();
         this.inventorySchema = new InventorySchema();
         this.logger = new LoggerUtility().getLoggerInstance();
+        this.errorTypes = new ErrorTypes();
     }
     parsedInputRequest (requestObject, entity) {
 
@@ -84,7 +86,7 @@ module.exports = class EntityValidator {
     
         }
     
-        return Joi.validate(parsedObject, joiEntitySchema);
+        return joiEntitySchema.validate(parsedObject);
     
       }
     
