@@ -1,0 +1,6 @@
+{
+    "DATA_SHEETS": {
+        "MEDICINE": "medicineDetails",
+        "INVENTORY": "inventoryDetails"
+    }
+}
