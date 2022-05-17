@@ -1,13 +1,13 @@
 // Imports
-import { createLogger, transports } from 'winston';
-import * as logform from 'logform';
-import nconf from 'nconf';
-import path from 'path';
+const { createLogger, transports } = require ( 'winston' );
+const logform = require ( 'logform');
+const nconf = require ( 'nconf');
+const path = require ( 'path');
 
 const { combine, timestamp, label, printf } = logform.format;
 var logger = null;
 
-export class LoggerUtility {
+module.exports = class LoggerUtility {
 
   getLoggerInstance () {
 

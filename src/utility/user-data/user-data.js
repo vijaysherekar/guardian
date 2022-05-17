@@ -1,10 +1,10 @@
-import fs from 'fs';
-import concat from 'concat-stream';
-import path from 'path';
-
-import { LoggerUtility } from '../logger';
-import { InventoryAdapter } from '../../adapters/inventory';
-export class UserDataUtility {
+const fs = require( 'fs');
+const concat = require( 'concat-stream');
+const path = require( 'path');
+const config = require('../../../config/config.json')
+const LoggerUtility = require( '../logger');
+const InventoryAdapter = require( '../../adapters/inventory');
+module.exports = class UserDataUtility {
 
   constructor () {
 
@@ -18,7 +18,7 @@ export class UserDataUtility {
     return new Promise((resolve, reject) => {
 
       try {
-        const JSONDirectory =  path.join(__dirname, "./assets/userStorage/")
+        const JSONDirectory =  path.join(__dirname, "./../../../assets/userStorage/")
         const JSONPath = `${JSONDirectory}${config.DATA_SHEETS[entity]}.json`
         const readTemplateStream = fs.createReadStream(path.resolve(JSONPath), { encoding: 'utf8' });
         const templateStream = concat((data) => {

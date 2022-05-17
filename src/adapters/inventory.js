@@ -1,15 +1,16 @@
-import { DailyCollectionError } from './../utility/error/daily-collector-error';
-import { ErrorTypes } from './../utility/enum/error-types';
-import { EntityValidator } from './../validators/entity-validator';
-import { ProjectEntity } from './../utility/enum/project-entity';
+const DailyCollectionError = require( './../utility/error/daily-collector-error');
+const ErrorTypes  = require( './../utility/enum/error-types');
+const EntityValidator  = require( './../validators/entity-validator');
+const ProjectEntity  = require( './../utility/enum/project-entity');
 
-export class InventoryAdapter {
+module.exports = class InventoryAdapter {
     constructor() {
         this.errorTypes = new ErrorTypes()
         this.entityValidator = new EntityValidator();
         this.projectEntity = new ProjectEntity();
     }
     post (request) {
+        return new Promise((resolve, reject) => {
         if (!(request && request.body && Object.keys(request.body).length)) {
 
             return reject(new DailyCollectionError(
@@ -20,6 +21,6 @@ export class InventoryAdapter {
           }
           const parsedObject = this.entityValidator
           .parsedInputRequest(request.body, this.projectEntity.INVENTORY);
-  
+        })
     }
 }

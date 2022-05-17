@@ -1,4 +1,4 @@
-export class ErrorTypes {
+module.exports = class ErrorTypes {
 
     constructor () {
   

@@ -30,7 +30,7 @@ sheets.forEach(sheet=>{
     const JSONPath = `${JSONDirectory}${config.DATA_SHEETS[sheet]}.json`
     generateJSONFile(JSONPath,dataSheetRecords)
     const userUtility = new UserDataUtility();
-    userUtility.insertUserDetails()
+    userUtility.insertUserDetails(sheet)
   }
   
 })

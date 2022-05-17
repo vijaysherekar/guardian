@@ -1,4 +1,4 @@
-export class ProjectEntity {
+module.exports = class ProjectEntity {
 
     constructor () {
   

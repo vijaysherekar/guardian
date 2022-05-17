@@ -1,4 +1,4 @@
-export class DailyCollectionError extends Error {
+module.exports = class DailyCollectionError extends Error {
 
     constructor (type, status, message, ...params) {
   

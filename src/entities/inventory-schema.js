@@ -1,6 +1,6 @@
-import * as Joi from 'joi';
+const Joi = require( 'joi');
 
-export class InventorySchema {
+module.exports = class InventorySchema {
 
   constructor () {
 
@@ -14,7 +14,7 @@ export class InventorySchema {
 
   }
 
-  getUserServerSchema () {
+  getInventoryServerSchema () {
 
     return {
         invoiceNumber: 'invoiceNumber',
@@ -35,7 +35,7 @@ export class InventorySchema {
 
   }
 
-  getUserClientSchema () {
+  getInventoryClientSchema () {
 
     return {
 
@@ -44,7 +44,7 @@ export class InventorySchema {
 
   }
 
-  getCreateUserSchema () {
+  getCreateInventorySchema () {
 
     return Joi.object().keys({
         invoiceNumber: this.JOI_CONSTANTS.stringMandatory,
@@ -65,7 +65,7 @@ export class InventorySchema {
 
   }
 
-  getUpdateUserSchema () {
+  getUpdateInventorySchema () {
 
     return Joi.object().keys({
         invoiceNumber: this.JOI_CONSTANTS.stringMandatory,

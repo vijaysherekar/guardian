@@ -1,14 +1,15 @@
-import mapper from 'object-mapper';
-import Joi from 'joi';
-import { DailyCollectionError } from '../utility/error/daily-collection-error';
-import { ProjectEntity } from './../utility/enum/project-entity';
-import { InventorySchema } from './../entities/inventory-schema';
-
-export class EntityValidator {
+const mapper = require('object-mapper');
+const Joi = require('joi');
+const DailyCollectionError = require('./../utility/error/daily-collector-error');
+const ProjectEntity = require('./../utility/enum/project-entity');
+const InventorySchema = require('./../entities/inventory-schema');
+const LoggerUtility = require('./../utility/logger');
+module.exports = class EntityValidator {
 
     constructor () {
         this.projectEntity = new ProjectEntity();
         this.inventorySchema = new InventorySchema();
+        this.logger = new LoggerUtility().getLoggerInstance();
     }
     parsedInputRequest (requestObject, entity) {
 
