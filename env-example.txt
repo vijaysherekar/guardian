@@ -1,0 +1,6 @@
+NODE_ENV = development
+PORT = 8000
+DB_USERNAME = <db_username>
+DB_PASSWORD = <db_password>
+DB_NAME = medicine
+DB_URI = mongodb+srv://<username>:<password>@mongocluster.abcd.mongodb.net/<db_name>?retryWrites=true&w=majority

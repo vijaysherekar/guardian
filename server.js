@@ -1,39 +1,18 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const http = require("http");
 const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 const app = require("./src/app");
-const datasheetHandler = require('./src/utility/datasheetHandler/datasheetHandler')
-const config = require('./config/config.json')
-const generateJSONFile = require('./src/utility/generateJSON/generateJSONFile')
-const server = http.createServer(app);
-// const emptyDirectory = require('./src/utility/emptyDirectory/emptyDirectory')
-dotenv.config({ path: `${__dirname}/config.env` });
-const path = require('path');
-const UserDataUtility = require('./src/utility/user-data/user-data')
-const DB = process.env.DATABASE.replace("<USERNAME>", process.env.USER).replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
+
+const DataSheetsInit = require("./src/utility/user-data/datasheets-init")
+
+dotenv.config();
+const DB = process.env.DB_URI.replace("<username>", process.env.DB_USERNAME).replace("<password>", process.env.DB_PASSWORD).replace("<db_name>", process.env.DB_NAME);
 const PORT = process.env.PORT | 8000;
 
 /*
-** Read from datasheet and create JSON file
-*/
-const sheets = ["MEDICINE","INVENTORY"]
-const dataSheetFolder = "./assets/datasheets/"
-const JSONDirectory =  path.join(__dirname, "./assets/userStorage/")
-sheets.forEach(sheet=>{
-  if (config.DATA_SHEETS[sheet]) {
-    const dataSheetPath = `${dataSheetFolder}${config.DATA_SHEETS[sheet]}.xlsx`
-    const dataSheetRecords = datasheetHandler(dataSheetPath)
-    const JSONPath = `${JSONDirectory}${config.DATA_SHEETS[sheet]}.json`
-    generateJSONFile(JSONPath,dataSheetRecords)
-    const userUtility = new UserDataUtility();
-    userUtility.insertUserDetails(sheet)
-  }
-  
-})
+ ** Read from datasheet and create JSON file
+ */
+const dataSheetInit = new DataSheetsInit();
+dataSheetInit.initializeData();
 
 // The below event handlers can be added before or after startServer function
 // As long as its after the require mongoose import
@@ -45,9 +24,10 @@ mongoose.connection.on("error", (err) => {
   console.error(err);
 });
 
-async function startServer() {
-  await mongoose.connect(DB);
-  server.listen(PORT, () => {
+function startServer() {
+  mongoose.connect(DB).then(() => {
+    console.log("Connected to DB");
+    app.listen(PORT);
     console.log(`Listening on port`, PORT);
   });
 }
