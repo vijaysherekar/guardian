@@ -9,7 +9,7 @@ module.exports = class DataSheetsInit {
     this.userUtility = new UserDataUtility();
   }
   initializeData() {
-    const sheets = ["INVENTORY"];
+    const sheets = ["MEDICINE", "INVENTORY"];
     const dataSheetFolder = "assets/datasheets/";
     const JSONDirectory = "assets/userStorage/";
     sheets.forEach((sheet) => {
